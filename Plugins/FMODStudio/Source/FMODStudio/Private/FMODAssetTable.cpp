@@ -203,7 +203,7 @@ void FFMODAssetTable::AddAsset(const FGuid &AssetGuid, const FString &AssetFullN
         UE_LOG(LogFMOD, Log, TEXT("Constructing asset: %s"), *AssetPackagePath);
 
         UPackage *NewPackage = CreatePackage(NULL, *AssetPackagePath);
-        if (NewPackage)
+        if (IsValid(NewPackage))
         {
             if (!GEventDrivenLoaderEnabled)
             {
@@ -256,7 +256,7 @@ void FFMODAssetTable::AddAsset(const FGuid &AssetGuid, const FString &AssetFullN
     }
 
     UFMODAsset *AssetGuidObject = ExistingGuidAsset.Get();
-    if (AssetGuidObject != nullptr && AssetGuidObject != AssetNameObject)
+    if (IsValid(AssetGuidObject) && AssetGuidObject != AssetNameObject)
     {
         FString OldPath = AssetGuidObject->GetPathName();
         UE_LOG(LogFMOD, Log, TEXT("Hiding old asset '%s'"), *OldPath);

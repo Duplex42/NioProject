@@ -159,6 +159,7 @@ class FMODSTUDIO_API UFMODAudioComponent : public USceneComponent
 {
     GENERATED_UCLASS_BODY()
 public:
+
     /** The event asset to use for this sound */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FMODAudio)
     TAssetPtr<class UFMODEvent> Event;
@@ -343,6 +344,16 @@ private:
 
     void ReleaseEventCache();
     void ReleaseEventInstance();
+
+    IFMODStudioModule& GetStudioModule()
+    {
+        if (Module == nullptr)
+        {
+            Module = &IFMODStudioModule::Get();
+        }
+        return *Module;
+    }
+    IFMODStudioModule* Module;
 
     // Settings for ambient volume effects
     double InteriorLastUpdateTime;

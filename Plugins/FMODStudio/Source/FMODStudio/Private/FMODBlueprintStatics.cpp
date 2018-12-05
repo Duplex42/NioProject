@@ -33,7 +33,7 @@ FFMODEventInstance UFMODBlueprintStatics::PlayEventAtLocation(
     Instance.Instance = nullptr;
 
     UWorld *ThisWorld = GEngine->GetWorldFromContextObjectChecked(WorldContextObject);
-    if (FMODUtils::IsWorldAudible(ThisWorld, false))
+    if (FMODUtils::IsWorldAudible(ThisWorld, false) && IsValid(Event))
     {
         FMOD::Studio::EventDescription *EventDesc = IFMODStudioModule::Get().GetEventDescription(Event);
         if (EventDesc != nullptr)
@@ -130,7 +130,7 @@ UFMODEvent *UFMODBlueprintStatics::FindEventByName(const FString &Name)
 void UFMODBlueprintStatics::LoadBank(class UFMODBank *Bank, bool bBlocking, bool bLoadSampleData)
 {
     FMOD::Studio::System *StudioSystem = IFMODStudioModule::Get().GetStudioSystem(EFMODSystemContext::Runtime);
-    if (StudioSystem != nullptr && Bank != nullptr)
+    if (StudioSystem != nullptr && IsValid(Bank))
     {
         UE_LOG(LogFMOD, Log, TEXT("LoadBank %s"), *Bank->FileName);
 
@@ -154,7 +154,7 @@ void UFMODBlueprintStatics::LoadBank(class UFMODBank *Bank, bool bBlocking, bool
 void UFMODBlueprintStatics::UnloadBank(class UFMODBank *Bank)
 {
     FMOD::Studio::System *StudioSystem = IFMODStudioModule::Get().GetStudioSystem(EFMODSystemContext::Runtime);
-    if (StudioSystem != nullptr && Bank != nullptr)
+    if (StudioSystem != nullptr && IsValid(Bank))
     {
         UE_LOG(LogFMOD, Log, TEXT("UnloadBank %s"), *Bank->FileName);
 
@@ -171,7 +171,7 @@ void UFMODBlueprintStatics::UnloadBank(class UFMODBank *Bank)
 bool UFMODBlueprintStatics::IsBankLoaded(class UFMODBank *Bank)
 {
     FMOD::Studio::System *StudioSystem = IFMODStudioModule::Get().GetStudioSystem(EFMODSystemContext::Runtime);
-    if (StudioSystem != nullptr && Bank != nullptr)
+    if (StudioSystem != nullptr && IsValid(Bank))
     {
         FMOD::Studio::ID guid = FMODUtils::ConvertGuid(Bank->AssetGuid);
         FMOD::Studio::Bank *bank = nullptr;
@@ -191,7 +191,7 @@ bool UFMODBlueprintStatics::IsBankLoaded(class UFMODBank *Bank)
 void UFMODBlueprintStatics::LoadBankSampleData(class UFMODBank *Bank)
 {
     FMOD::Studio::System *StudioSystem = IFMODStudioModule::Get().GetStudioSystem(EFMODSystemContext::Runtime);
-    if (StudioSystem != nullptr && Bank != nullptr)
+    if (StudioSystem != nullptr && IsValid(Bank))
     {
         FMOD::Studio::ID guid = FMODUtils::ConvertGuid(Bank->AssetGuid);
         FMOD::Studio::Bank *bank = nullptr;
@@ -206,7 +206,7 @@ void UFMODBlueprintStatics::LoadBankSampleData(class UFMODBank *Bank)
 void UFMODBlueprintStatics::UnloadBankSampleData(class UFMODBank *Bank)
 {
     FMOD::Studio::System *StudioSystem = IFMODStudioModule::Get().GetStudioSystem(EFMODSystemContext::Runtime);
-    if (StudioSystem != nullptr && Bank != nullptr)
+    if (StudioSystem != nullptr && IsValid(Bank))
     {
         FMOD::Studio::ID guid = FMODUtils::ConvertGuid(Bank->AssetGuid);
         FMOD::Studio::Bank *bank = nullptr;
@@ -220,38 +220,47 @@ void UFMODBlueprintStatics::UnloadBankSampleData(class UFMODBank *Bank)
 
 void UFMODBlueprintStatics::LoadEventSampleData(UObject *WorldContextObject, class UFMODEvent *Event)
 {
-    FMOD::Studio::EventDescription *EventDesc = IFMODStudioModule::Get().GetEventDescription(Event);
-    if (EventDesc != nullptr)
+    if (IsValid(Event))
     {
-        EventDesc->loadSampleData();
+        FMOD::Studio::EventDescription *EventDesc = IFMODStudioModule::Get().GetEventDescription(Event);
+        if (EventDesc != nullptr)
+        {
+            EventDesc->loadSampleData();
+        }
     }
 }
 
 void UFMODBlueprintStatics::UnloadEventSampleData(UObject *WorldContextObject, class UFMODEvent *Event)
 {
-    FMOD::Studio::EventDescription *EventDesc = IFMODStudioModule::Get().GetEventDescription(Event);
-    if (EventDesc != nullptr)
+    if (IsValid(Event))
     {
-        EventDesc->unloadSampleData();
+        FMOD::Studio::EventDescription *EventDesc = IFMODStudioModule::Get().GetEventDescription(Event);
+        if (EventDesc != nullptr)
+        {
+            EventDesc->unloadSampleData();
+        }
     }
 }
 
 TArray<FFMODEventInstance> UFMODBlueprintStatics::FindEventInstances(UObject *WorldContextObject, UFMODEvent *Event)
 {
-    FMOD::Studio::EventDescription *EventDesc = IFMODStudioModule::Get().GetEventDescription(Event);
     TArray<FFMODEventInstance> Instances;
-    if (EventDesc != nullptr)
+    if (IsValid(Event))
     {
-        int Capacity = 0;
-        EventDesc->getInstanceCount(&Capacity);
-        TArray<FMOD::Studio::EventInstance *> InstancePointers;
-        InstancePointers.SetNum(Capacity, true);
-        int Count = 0;
-        EventDesc->getInstanceList(InstancePointers.GetData(), Capacity, &Count);
-        Instances.SetNum(Count, true);
-        for (int i = 0; i < Count; ++i)
+        FMOD::Studio::EventDescription *EventDesc = IFMODStudioModule::Get().GetEventDescription(Event);
+        if (EventDesc != nullptr)
         {
-            Instances[i].Instance = InstancePointers[i];
+            int Capacity = 0;
+            EventDesc->getInstanceCount(&Capacity);
+            TArray<FMOD::Studio::EventInstance *> InstancePointers;
+            InstancePointers.SetNum(Capacity, true);
+            int Count = 0;
+            EventDesc->getInstanceList(InstancePointers.GetData(), Capacity, &Count);
+            Instances.SetNum(Count, true);
+            for (int i = 0; i < Count; ++i)
+            {
+                Instances[i].Instance = InstancePointers[i];
+            }
         }
     }
     return Instances;
@@ -260,7 +269,7 @@ TArray<FFMODEventInstance> UFMODBlueprintStatics::FindEventInstances(UObject *Wo
 void UFMODBlueprintStatics::BusSetVolume(class UFMODBus *Bus, float Volume)
 {
     FMOD::Studio::System *StudioSystem = IFMODStudioModule::Get().GetStudioSystem(EFMODSystemContext::Runtime);
-    if (StudioSystem != nullptr && Bus != nullptr)
+    if (StudioSystem != nullptr && IsValid(Bus))
     {
         FMOD::Studio::ID guid = FMODUtils::ConvertGuid(Bus->AssetGuid);
         FMOD::Studio::Bus *bus = nullptr;
@@ -275,7 +284,7 @@ void UFMODBlueprintStatics::BusSetVolume(class UFMODBus *Bus, float Volume)
 void UFMODBlueprintStatics::BusSetPaused(class UFMODBus *Bus, bool bPaused)
 {
     FMOD::Studio::System *StudioSystem = IFMODStudioModule::Get().GetStudioSystem(EFMODSystemContext::Runtime);
-    if (StudioSystem != nullptr && Bus != nullptr)
+    if (StudioSystem != nullptr && IsValid(Bus))
     {
         FMOD::Studio::ID guid = FMODUtils::ConvertGuid(Bus->AssetGuid);
         FMOD::Studio::Bus *bus = nullptr;
@@ -290,7 +299,7 @@ void UFMODBlueprintStatics::BusSetPaused(class UFMODBus *Bus, bool bPaused)
 void UFMODBlueprintStatics::BusSetMute(class UFMODBus *Bus, bool bMute)
 {
     FMOD::Studio::System *StudioSystem = IFMODStudioModule::Get().GetStudioSystem(EFMODSystemContext::Runtime);
-    if (StudioSystem != nullptr && Bus != nullptr)
+    if (StudioSystem != nullptr && IsValid(Bus))
     {
         FMOD::Studio::ID guid = FMODUtils::ConvertGuid(Bus->AssetGuid);
         FMOD::Studio::Bus *bus = nullptr;
@@ -305,7 +314,7 @@ void UFMODBlueprintStatics::BusSetMute(class UFMODBus *Bus, bool bMute)
 void UFMODBlueprintStatics::BusStopAllEvents(UFMODBus *Bus, EFMOD_STUDIO_STOP_MODE stopMode)
 {
     FMOD::Studio::System *StudioSystem = IFMODStudioModule::Get().GetStudioSystem(EFMODSystemContext::Runtime);
-    if (StudioSystem != nullptr && Bus != nullptr)
+    if (StudioSystem != nullptr && IsValid(Bus))
     {
         FMOD::Studio::ID guid = FMODUtils::ConvertGuid(Bus->AssetGuid);
         FMOD::Studio::Bus *bus = nullptr;
@@ -320,7 +329,7 @@ void UFMODBlueprintStatics::BusStopAllEvents(UFMODBus *Bus, EFMOD_STUDIO_STOP_MO
 void UFMODBlueprintStatics::VCASetVolume(class UFMODVCA *Vca, float Volume)
 {
     FMOD::Studio::System *StudioSystem = IFMODStudioModule::Get().GetStudioSystem(EFMODSystemContext::Runtime);
-    if (StudioSystem != nullptr && Vca != nullptr)
+    if (StudioSystem != nullptr && IsValid(Vca))
     {
         FMOD::Studio::ID guid = FMODUtils::ConvertGuid(Vca->AssetGuid);
         FMOD::Studio::VCA *vca = nullptr;

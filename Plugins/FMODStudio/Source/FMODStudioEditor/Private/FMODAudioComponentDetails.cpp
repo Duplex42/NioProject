@@ -87,7 +87,7 @@ FReply FFMODAudioComponentDetails::OnPlaySoundClicked()
     if (AudioComponent.IsValid())
     {
         UFMODEvent *Event = AudioComponent.Get()->Event.Get();
-        if (Event)
+        if (IsValid(Event))
         {
             FMOD::Studio::EventInstance *Instance = IFMODStudioModule::Get().CreateAuditioningInstance(Event);
             if (Instance)

@@ -57,7 +57,7 @@ void AFMODAmbientSound::CheckForErrors(void)
 
 bool AFMODAmbientSound::GetReferencedContentObjects(TArray<UObject *> &Objects) const
 {
-    if (AudioComponent->Event)
+    if (IsValid(AudioComponent) && AudioComponent->Event)
     {
         Objects.Add(AudioComponent->Event.Get());
     }

@@ -14,7 +14,10 @@ struct FPlayingToken : IMovieScenePreAnimatedToken
 
         if (UFMODAudioComponent *AudioComponent = Cast<UFMODAudioComponent>(&InObject))
         {
-            bPlaying = AudioComponent->IsPlaying();
+            if (IsValid(AudioComponent))
+            {
+                bPlaying = AudioComponent->IsPlaying();
+            }
         }
     }
 
@@ -75,7 +78,7 @@ struct FFMODEventControlExecutionToken : IMovieSceneExecutionToken
                 AudioComponent = AmbientSound ? AmbientSound->AudioComponent : nullptr;
             }
 
-            if (AudioComponent)
+            if (IsValid(AudioComponent))
             {
                 Player.SavePreAnimatedState(*AudioComponent, FPlayingTokenProducer::GetAnimTypeID(), FPlayingTokenProducer());
 

@@ -50,10 +50,10 @@ int32 FFMODEventControlSection::OnPaintSection(FSequencerSectionPainter &InPaint
 
     // TODO: Set / clip stop time based on event length
     UFMODEventControlSection *ControlSection = Cast<UFMODEventControlSection>(&Section);
-    if (ControlSection != nullptr)
+    if (IsValid(ControlSection))
     {
         UFMODEventControlTrack *ParentTrack = Cast<UFMODEventControlTrack>(ControlSection->GetOuter());
-        if (ParentTrack != nullptr)
+        if (IsValid(ParentTrack))
         {
             TrackColor = ParentTrack->GetColorTint();
         }
@@ -156,7 +156,7 @@ void FFMODEventControlTrackEditor::AddControlKey(const FGuid ObjectGuid)
     TSharedPtr<ISequencer> SequencerPtr = GetSequencer();
     UObject *Object = SequencerPtr.IsValid() ? SequencerPtr->FindSpawnedObjectOrTemplate(ObjectGuid) : nullptr;
 
-    if (Object)
+    if (IsValid(Object))
     {
         AnimatablePropertyChanged(FOnKeyProperty::CreateRaw(this, &FFMODEventControlTrackEditor::AddKeyInternal, Object));
     }

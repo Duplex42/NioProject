@@ -383,6 +383,8 @@ typedef unsigned int FMOD_STUDIO_SYSTEM_CALLBACK_TYPE;
 #define FMOD_STUDIO_EVENT_CALLBACK_TIMELINE_BEAT            0x00001000  /* Called when the timeline hits a beat in a tempo section.  Parameters = FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES. */
 #define FMOD_STUDIO_EVENT_CALLBACK_SOUND_PLAYED             0x00002000  /* Called when the event plays a sound.  Parameters = FMOD::Sound. */
 #define FMOD_STUDIO_EVENT_CALLBACK_SOUND_STOPPED            0x00004000  /* Called when the event finishes playing a sound.  Parameters = FMOD::Sound. */
+#define FMOD_STUDIO_EVENT_CALLBACK_REAL_TO_VIRTUAL          0x00008000  /* Called when the event becomes virtual.  Parameters = unused. */
+#define FMOD_STUDIO_EVENT_CALLBACK_VIRTUAL_TO_REAL          0x00010000  /* Called when the event becomes real.  Parameters = unused. */
 #define FMOD_STUDIO_EVENT_CALLBACK_ALL                      0xFFFFFFFF  /* Pass this mask to Studio::EventDescription::setCallback or Studio::EventInstance::setCallback to receive all callback types. */
 /* [DEFINE_END] */
 

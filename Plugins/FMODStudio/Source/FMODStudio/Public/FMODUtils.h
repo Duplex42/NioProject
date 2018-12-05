@@ -73,7 +73,7 @@ inline bool IsWorldAudible(UWorld *World, bool AllowInEditor)
 {
     if (GEngine && IFMODStudioModule::Get().UseSound())
     {
-        if (World == nullptr)
+        if (!IsValid(World))
         {
             return true;
         }
