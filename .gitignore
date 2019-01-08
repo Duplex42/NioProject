@@ -75,3 +75,16 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+Content/DynamicCombatSystem/Blueprints/Components/BPC_Statistic.uasset
+Content/DynamicCombatSystem/Widgets/WB_BaseStatBar.uasset
+Content/DynamicCombatSystem/Enumerations/E_Statistic.uasset
+Content/DynamicCombatSystem/Blueprints/Libraries/BPL_CombatSystem.uasset
+Content/DynamicCombatSystem/Blueprints/Components/BPC_Statistic.uasset
+Content/DynamicCombatSystem/Blueprints/Components/BPC_MontagesManager.uasset
+Content/AdvancedLocomotionV2/Characters/Mannequin/UE4_Mannequin_Skeleton.uasset
+Content/AdvancedLocomotionV2/Characters/Mannequin/Mannequin_PostProcess_AnimBP.uasset
+Content/AdvancedLocomotionV2/Blueprints/TurnInPlace_AnimNotifyState.uasset
+Content/AdvancedLocomotionV2/Blueprints/ALS_Player_CharacterBP.uasset
+Content/AdvancedLocomotionV2/Blueprints/ALS_Component.uasset
+Content/AdvancedLocomotionV2/Blueprints/ALS_AnimBP.uasset
+Content/DynamicCombatSystem/Widgets/WB_BaseStatBar.uasset
