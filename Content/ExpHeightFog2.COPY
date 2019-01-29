@@ -1,0 +1,77 @@
+Begin Object Class=/Script/LevelSequence.LevelSequence Name="ExpHeightFog2"
+   Begin Object Class=/Script/MovieScene.MovieScene Name="MovieScene_0"
+      Begin Object Class=/Script/MovieSceneTracks.MovieSceneFloatTrack Name="MovieSceneFloatTrack_2"
+         Begin Object Class=/Script/MovieSceneTracks.MovieSceneFloatSection Name="MovieSceneFloatSection_0"
+            Begin Object Class=/Script/MovieScene.MovieSceneBuiltInEasingFunction Name="EaseOutFunction" Archetype=MovieSceneBuiltInEasingFunction'/Script/MovieSceneTracks.Default__MovieSceneFloatSection:EaseOutFunction'
+            End Object
+            Begin Object Class=/Script/MovieScene.MovieSceneBuiltInEasingFunction Name="EaseInFunction" Archetype=MovieSceneBuiltInEasingFunction'/Script/MovieSceneTracks.Default__MovieSceneFloatSection:EaseInFunction'
+            End Object
+         End Object
+      End Object
+      Begin Object Class=/Script/MovieSceneTracks.MovieSceneFloatTrack Name="MovieSceneFloatTrack_0"
+         Begin Object Class=/Script/MovieSceneTracks.MovieSceneFloatSection Name="MovieSceneFloatSection_0"
+            Begin Object Class=/Script/MovieScene.MovieSceneBuiltInEasingFunction Name="EaseOutFunction" Archetype=MovieSceneBuiltInEasingFunction'/Script/MovieSceneTracks.Default__MovieSceneFloatSection:EaseOutFunction'
+            End Object
+            Begin Object Class=/Script/MovieScene.MovieSceneBuiltInEasingFunction Name="EaseInFunction" Archetype=MovieSceneBuiltInEasingFunction'/Script/MovieSceneTracks.Default__MovieSceneFloatSection:EaseInFunction'
+            End Object
+         End Object
+      End Object
+   End Object
+   Begin Object Name="MovieScene_0"
+      Begin Object Name="MovieSceneFloatTrack_2"
+         Begin Object Name="MovieSceneFloatSection_0"
+            Begin Object Name="EaseOutFunction"
+            End Object
+            Begin Object Name="EaseInFunction"
+            End Object
+            FloatCurve=(Times=((),(Value=242399)),Values=((Value=0.200000),(Value=0.010000)),DefaultValue=0.010000,bHasDefaultValue=True)
+            EvalOptions=(CompletionMode=KeepState)
+            Easing=(EaseIn=MovieSceneBuiltInEasingFunction'ExpHeightFog2:MovieScene_0.MovieSceneFloatTrack_2.MovieSceneFloatSection_0.EaseInFunction',EaseOut=MovieSceneBuiltInEasingFunction'ExpHeightFog2:MovieScene_0.MovieSceneFloatTrack_2.MovieSceneFloatSection_0.EaseOutFunction')
+            SectionRange=Open:0:Open:0
+            Signature=FC540EFF4D89BF8279E5EB820A9481E9
+         End Object
+         UniqueTrackName="FogHeightFalloff"
+         PropertyName="FogHeightFalloff"
+         PropertyPath="FogHeightFalloff"
+         Sections(0)=MovieSceneFloatSection'"MovieSceneFloatSection_0"'
+         DisplayName=NSLOCTEXT("", "9E52C9FB4396EC43AE3BCA919C75138E", "Fog Height Falloff")
+         SortingOrder=1
+         Signature=D1F07AD147CB8565986789A78341AC4F
+      End Object
+      Begin Object Name="MovieSceneFloatTrack_0"
+         Begin Object Name="MovieSceneFloatSection_0"
+            Begin Object Name="EaseOutFunction"
+            End Object
+            Begin Object Name="EaseInFunction"
+            End Object
+            FloatCurve=(Times=((),(Value=242399)),Values=((Value=0.020000),(Value=1.800000)),DefaultValue=1.800000,bHasDefaultValue=True)
+            EvalOptions=(CompletionMode=KeepState)
+            Easing=(EaseIn=MovieSceneBuiltInEasingFunction'ExpHeightFog2:MovieScene_0.MovieSceneFloatTrack_0.MovieSceneFloatSection_0.EaseInFunction',EaseOut=MovieSceneBuiltInEasingFunction'ExpHeightFog2:MovieScene_0.MovieSceneFloatTrack_0.MovieSceneFloatSection_0.EaseOutFunction')
+            SectionRange=Open:0:Open:0
+            Signature=A4516AC3428A378803FE3E9332142B4E
+         End Object
+         UniqueTrackName="FogDensity"
+         PropertyName="FogDensity"
+         PropertyPath="FogDensity"
+         Sections(0)=MovieSceneFloatSection'"MovieSceneFloatSection_0"'
+         DisplayName=NSLOCTEXT("", "8C801E9C432135E44F8D82B38D463AEB", "Fog Density")
+         SortingOrder=0
+         Signature=5BB3DE8148B9454898A2ACA7FF4D0061
+      End Object
+      Possessables(0)=(Guid=381BBEA743B50B651B7F6E9B5F46754B,Name="ExpHeightFog",PossessedObjectClass=Class'"/Script/LevelSequence.LevelSequenceActor"')
+      Possessables(1)=(Guid=BA6C157444D8448EAEF56F8EC3071B57,Name="ExponentialHeightFog",PossessedObjectClass=Class'"/Script/Engine.ExponentialHeightFog"')
+      Possessables(2)=(Guid=EE7085C0451101F74A47D699DB75E30F,Name="HeightFogComponent0",PossessedObjectClass=Class'"/Script/Engine.ExponentialHeightFogComponent"',ParentGuid=BA6C157444D8448EAEF56F8EC3071B57)
+      ObjectBindings(0)=(ObjectGuid=381BBEA743B50B651B7F6E9B5F46754B,BindingName="ExpHeightFog",SortingOrder=0)
+      ObjectBindings(1)=(ObjectGuid=BA6C157444D8448EAEF56F8EC3071B57,BindingName="ExponentialHeightFog",SortingOrder=1)
+      ObjectBindings(2)=(ObjectGuid=EE7085C0451101F74A47D699DB75E30F,BindingName="HeightFogComponent0",Tracks=(MovieSceneFloatTrack'"MovieSceneFloatTrack_0"',MovieSceneFloatTrack'"MovieSceneFloatTrack_2"'),SortingOrder=0)
+      PlaybackRange=Inclusive:0:Exclusive:242400
+      TickResolution=(Numerator=24000)
+      DisplayRate=(Numerator=30)
+      EditorData=(ExpansionStates=(("381BBEA743B50B651B7F6E9B5F46754B", ()),("381BBEA743B50B651B7F6E9B5F46754B.MovieScene3DTransformTrack_0", ()),("381BBEA743B50B651B7F6E9B5F46754B.MovieScene3DTransformTrack_0.Scale", (bExpanded=False)),("381BBEA743B50B651B7F6E9B5F46754B.MovieScene3DTransformTrack_0.Rotation", (bExpanded=False)),("381BBEA743B50B651B7F6E9B5F46754B.MovieScene3DTransformTrack_0.Location", (bExpanded=False)),("381BBEA743B50B651B7F6E9B5F46754B.2F9A722E441F95E1D96F0CBBCA71FB4E", ()),("381BBEA743B50B651B7F6E9B5F46754B.A3023D8745F4B952AB1AE7AE3BD64962", (bExpanded=False)),("BA6C157444D8448EAEF56F8EC3071B57", ()),("BA6C157444D8448EAEF56F8EC3071B57.EE7085C0451101F74A47D699DB75E30F", ())),ViewStart=-0.541908,ViewEnd=12.032284,WorkStart=-0.541908,WorkEnd=12.074191)
+      Signature=D698DCFF41CF83BDE2D21984C44D7541
+   End Object
+   MovieScene=MovieScene'"MovieScene_0"'
+   BindingReferences=(BindingIdToReferences=((381BBEA743B50B651B7F6E9B5F46754B, (References=((ExternalObjectPath=/Game/Nio_Souls_of_Desert/LvL/StartLvL.StartLvL:PersistentLevel.ExpHeightFog)))),(EE7085C0451101F74A47D699DB75E30F, (References=((ObjectPath="HeightFogComponent0")))),(BA6C157444D8448EAEF56F8EC3071B57, (References=((ExternalObjectPath=/Game/Nio_Souls_of_Desert/LvL/StartLvL.StartLvL:PersistentLevel.ExponentialHeightFog_8))))))
+   PrecompiledEvaluationTemplate=(TemplateSerialNumber=(Value=14))
+   Signature=6DD5999C49BF06A8832F83A5AFFFD2F5
+End Object
