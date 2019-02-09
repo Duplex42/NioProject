@@ -75,3 +75,5 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/
+Builds/WindowsNoEditorWorking/NewTestMerge2/Content/Paks/NewTestMerge2-WindowsNoEditor.pak
+Builds/WindowsNoEditor/NewTestMerge2/Content/Paks/NewTestMerge2-WindowsNoEditor.pak
